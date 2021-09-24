@@ -22,12 +22,11 @@ class Grafo():
         self.adjacencia[origem][destino] = peso
 
     def exibir_perfil(self, nome):
-    
+        
         # seguindo
         seguindo = 0
         for el in self.adjacencia[nome].keys():
             seguindo += 1
-        print(f"O usuário {nome} segue {seguindo} usuários.\n")
 
         # seguidores
         seguidores = []
@@ -36,8 +35,7 @@ class Grafo():
                 if nome in el1:
                     seguidores.append(el1) 
 
-        print(f"O usuário {nome} tem {len(seguidores)} seguidores.\n")
-
+        print(f"O usuário {nome} segue {seguindo} usuários e tem {len(seguidores)} seguidores.\n")
 
     def story(self, nome):
         
@@ -68,7 +66,7 @@ class Grafo():
         #juntar ambas listas
         lista_story = melhores_amigos + amigos_comuns
         
-        print(f'Exibição de stories do usuario {nome}: {lista_story}')
+        print(f'Exibição de stories do usuário {nome}: {lista_story}\n')
 
     def top_influencers(self, k):
     
@@ -93,7 +91,7 @@ class Grafo():
                 if influencers[j][1] > influencers[i][1]:
                     influencers[i], influencers[j] = influencers[j], influencers[i]
 
-        print(f'Tops {k} influencers\n')
+        print(f'*** TOP {k} INFLUENCERS ***')
         for el in influencers[::-1][:k]:
             print(f'{el[0]}: {el[1]}')
 
@@ -109,5 +107,6 @@ def cria_grafo():
 
 g = cria_grafo()
 
-
+g.exibir_perfil("helena42")
+g.story("helena42")
 g.top_influencers(5)
