@@ -1,11 +1,13 @@
 import csv
 
-caminho_conexoes = 'C:\\Users\\Flávio Quirino\\Desktop\\Programação\\Curso Lets Code - Pi DS\\Projetos\\Estruturas de Dados\\Projeto-Rede-Social\\conexoes.csv'
-caminho_usuarios = 'C:\\Users\\Flávio Quirino\\Desktop\\Programação\\Curso Lets Code - Pi DS\\Projetos\\Estruturas de Dados\\Projeto-Rede-Social\\usuarios.csv'
+#caminho_conexoes = 'C:\\Users\\Flávio Quirino\\Desktop\\Programação\\Curso Lets Code - Pi DS\\Projetos\\Estruturas de Dados\\Projeto-Rede-Social\\conexoes.csv'
+#caminho_usuarios = 'C:\\Users\\Flávio Quirino\\Desktop\\Programação\\Curso Lets Code - Pi DS\\Projetos\\Estruturas de Dados\\Projeto-Rede-Social\\usuarios.csv'
 
-df_conexoes = open(caminho_conexoes, 'r', encoding = 'utf-8')
+#df_conexoes = open(caminho_conexoes, 'r', encoding = 'utf-8')
+df_conexoes = open("conexoes.csv", 'r', encoding = 'utf-8')
 reader_conexoes = csv.reader(df_conexoes)
-df_usuarios = open(caminho_usuarios, 'r', encoding = 'utf-8')
+#df_usuarios = open(caminho_usuarios, 'r', encoding = 'utf-8')
+df_usuarios = open("usuarios.csv", 'r', encoding = 'utf-8')
 reader_usuarios = csv.reader(df_usuarios)
 class Grafo():
     def __init__(self):
