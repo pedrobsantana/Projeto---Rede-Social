@@ -94,6 +94,37 @@ class Grafo():
         print(f'*** TOP {k} INFLUENCERS ***')
         for el in influencers[::-1][:k]:
             print(f'{el[0]}: {el[1]}')
+            
+    def busca_caminho_usuarios(self, nome1, nome2):
+        fila = [nome1]
+        visitados = []
+        predecessor = {nome1: None}
+        
+        #enquanto tiver elementos na fila
+        while len(fila) > 0:
+            primeiro_elemento = fila[0]
+            fila = fila[1:]
+            visitados.append(primeiro_elemento)
+            for adjacente in self.adjacencia[primeiro_elemento].keys():
+                
+                # se achou, monta o caminho
+                if adjacente == nome2:
+                    pred = primeiro_elemento
+                    caminho_invertido = [nome2]
+                    while pred is not None:
+                        caminho_invertido.append(pred)
+                        pred = predecessor[pred]
+                        
+                    caminho = ""
+                    for no in caminho_invertido[::-1]:
+                        caminho += f"{no} -> "
+                    return print(f"\nO caminho entre os usuários {nome1} e {nome2} é: {caminho[:-3]}")
+                
+                if adjacente not in fila and adjacente not in visitados:
+                    predecessor[adjacente] = primeiro_elemento
+                    fila.append(adjacente)
+        return False
+                        
 
 def cria_grafo():
     g = Grafo()
@@ -110,3 +141,4 @@ g = cria_grafo()
 g.exibir_perfil("helena42")
 g.story("helena42")
 g.top_influencers(5)
+g.busca_caminho_usuarios("miguel1", "alice43")
