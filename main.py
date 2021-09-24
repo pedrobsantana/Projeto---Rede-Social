@@ -6,9 +6,11 @@ import csv
 #df_conexoes = open(caminho_conexoes, 'r', encoding = 'utf-8')
 df_conexoes = open("conexoes.csv", 'r', encoding = 'utf-8')
 reader_conexoes = csv.reader(df_conexoes)
+
 #df_usuarios = open(caminho_usuarios, 'r', encoding = 'utf-8')
 df_usuarios = open("usuarios.csv", 'r', encoding = 'utf-8')
 reader_usuarios = csv.reader(df_usuarios)
+
 class Grafo():
     def __init__(self):
         self.adjacencia = {}
@@ -40,7 +42,7 @@ def exibir_perfil(nome):
     for el in g.adjacencia[nome].keys():
         seguindo += 1
 
-    print(f'seguindo: {seguindo}.\n')
+    print(f"O usuário(a) {nome} segue {seguindo} usuários.\n")
 
     # seguidores
     seguidores = 0
@@ -48,7 +50,8 @@ def exibir_perfil(nome):
         if nome == g.adjacencia[el].keys():
             seguindo += 1
 
-    print(f'seguidores: {seguidores}.\n')
+    print(f"O usuário(a) {nome} tem {seguidores} seguidores.\n")
+
 
 exibir_perfil('helena42')
 
