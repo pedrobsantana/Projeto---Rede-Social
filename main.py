@@ -76,7 +76,7 @@ class Grafo():
             count = 0
             for seguindo in self.adjacencia.items():
                 for el in seguindo[1]:
-                    if usuario in el:
+                    if usuario == el:
                         count += 1
 
             num_seguidores[usuario] = count
@@ -139,6 +139,9 @@ def cria_grafo():
 g = cria_grafo()
 
 g.exibir_perfil("helena42")
+g.exibir_perfil("henrique12")
+g.exibir_perfil("maria_alice19")
 g.story("helena42")
 g.top_influencers(5)
-g.busca_caminho_usuarios("miguel1", "maria_alice19")
+g.busca_caminho_usuarios("alice43", "clara1")
+g.busca_caminho_usuarios("helena42", "isadora45")
