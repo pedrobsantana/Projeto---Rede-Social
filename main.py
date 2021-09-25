@@ -115,7 +115,7 @@ class Grafo():
                 if adjacente not in fila and adjacente not in visitados:
                     predecessor[adjacente] = primeiro_elemento
                     fila.append(adjacente)
-        return False
+        return print(f"Não foi possivel encontrar um caminho entre {nome1} e {nome2}.")
                         
 
 def cria_grafo():
