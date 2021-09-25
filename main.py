@@ -1,13 +1,7 @@
 import csv
 
-#caminho_conexoes = 'C:\\Users\\Flávio Quirino\\Desktop\\Programação\\Curso Lets Code - Pi DS\\Projetos\\Estruturas de Dados\\Projeto-Rede-Social\\conexoes.csv'
-#caminho_usuarios = 'C:\\Users\\Flávio Quirino\\Desktop\\Programação\\Curso Lets Code - Pi DS\\Projetos\\Estruturas de Dados\\Projeto-Rede-Social\\usuarios.csv'
-
 reader_conexoes = csv.reader(open("conexoes.csv", 'r', encoding = 'utf-8'))
-#reader_conexoes = open("conexoes.csv", 'r', encoding = 'utf-8')
-
 reader_usuarios = csv.reader(open("usuarios.csv", 'r', encoding = 'utf-8'))
-#reader_usuarios = open("usuarios.csv", 'r', encoding = 'utf-8')
 
 class Grafo():
     def __init__(self):
@@ -81,8 +75,6 @@ class Grafo():
 
             num_seguidores[usuario] = count
 
-        # print(num_seguidores)
-
         influencers = list(num_seguidores.items())
 
         # Bubblesort para ordernar top influencers
@@ -139,9 +131,6 @@ def cria_grafo():
 g = cria_grafo()
 
 g.exibir_perfil("helena42")
-g.exibir_perfil("henrique12")
-g.exibir_perfil("maria_alice19")
 g.story("helena42")
 g.top_influencers(5)
-g.busca_caminho_usuarios("alice43", "clara1")
 g.busca_caminho_usuarios("helena42", "isadora45")
