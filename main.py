@@ -6,25 +6,36 @@ reader_usuarios = csv.reader(open("usuarios.csv", 'r', encoding = 'utf-8'))
 class Grafo():
     def __init__(self):
         self.adjacencia = {}
-
-        '''
-        Função para adicionar um vértice (adicionar um usuário) e  criar a chave do vértice dentro do nosso dicionário de adjacência
-        '''
+     
     def adiciona(self, vertice):
+        '''
+        Definição: Função para adicionar um vértice (adicionar um usuário) e 
+        criar a chave do vértice dentro do nosso dicionário de adjacência.
+
+        Parametro: vertice(username).
+        '''
         self.adjacencia[vertice] = {}
     
 
-        '''
-        Função para conectar os usuários, acessar nosso vértice e criar uma chave para a conexão dele, atribuindo o valor como sendo o peso
-        '''
+        
     def conecta(self, origem, destino, peso = 1):
+        '''
+        Definição: Função para conectar os usuários, acessar nosso vértice e criar uma chave para a conexão dele, 
+        atribuindo o valor como sendo o peso
+
+        Parametro: origem(username primário), destino(username que irá receber a ligação), 
+        peso(qual tipo de ligação entre eles, 1-Amigos Comuns / 2-Melhores Amigos).
+        '''
         self.adjacencia[origem][destino] = peso
 
 
-        '''
-        Função para exibir a quantidade de quantas pessoas que o perfil está seguindo e quantos seguidores possui
-        '''
+        
     def exibir_perfil(self, nome):
+        '''
+        Definição: Função para exibir quantas pessoas que o perfil está seguindo e quantos seguidores possui.
+
+        Parametro: nome(username).
+        '''
         # seguindo
         seguindo = 0
         for elemento in self.adjacencia[nome].keys():
@@ -40,10 +51,14 @@ class Grafo():
         print(f"O usuário {nome} tem {len(seguidores)} seguidores e segue {seguindo} usuários.\n")
 
 
-        '''
-        Função para ordenar a lista de Stories, por ordem alfabética com melhores amigos primeiro e depois amigos comuns
-        '''
+        
     def stories(self, nome):
+        '''
+        Definição: Função para ordenar a lista de Stories, 
+        por ordem alfabética com melhores amigos primeiro e depois amigos comuns.
+
+        Parametro: nome(username).
+        '''
         lista_amigos = list(self.adjacencia[nome].items())
 
         melhores_amigos = []
@@ -74,10 +89,13 @@ class Grafo():
         print(f'Exibição de stories do usuário {nome}: {lista_stories}\n')
 
 
+        
+    def top_influencers(self, k):
         '''
-        Função para encontrar quem tem mais seguidores na rede, os Top Influencers
-        '''
-    def top_influencers(self, k):   
+        Definição: Função para encontrar quem tem mais seguidores na rede, os Top Influencers.
+
+        Parametro: k(Numero de quantos do ranking para ver).
+        '''   
         num_seguidores = {}
 
         for usuario in self.adjacencia:
@@ -102,10 +120,13 @@ class Grafo():
             print(f'{elemento[0]}: {elemento[1]}')
 
 
-        '''
-        Função para encontrar o caminho entre uma pessoa e outra na rede
-        '''
+        
     def busca_caminho_usuarios(self, nome1, nome2):
+        '''
+        Definição: Função para encontrar o caminho entre uma pessoa e outra na rede.
+
+        Parametro: nome1(usuario primario), nome2(usuario destino)
+        '''
         fila = [nome1]
         visitados = []
         predecessor = {nome1: None}
