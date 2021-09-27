@@ -7,70 +7,84 @@ class Grafo():
     def __init__(self):
         self.adjacencia = {}
 
+        '''
+        Função para adicionar um vértice (adicionar um usuário) e  criar a chave do vértice dentro do nosso dicionário de adjacência
+        '''
     def adiciona(self, vertice):
-        # Para adicionar um vertice, simplesmente criamos a chave dele dentro nosso dicionario de adjacencia
         self.adjacencia[vertice] = {}
     
+
+        '''
+        Função para conectar os usuários, acessar nosso vértice e criar uma chave para a conexão dele, atribuindo o valor como sendo o peso
+        '''
     def conecta(self, origem, destino, peso = 1):
-        # Acessamos nosso vertice e criamos uma chave para a conexao dele, atribuindo o valor como sendo o peso
         self.adjacencia[origem][destino] = peso
 
+
+        '''
+        Função para exibir a quantidade de quantas pessoas que o perfil está seguindo e quantos seguidores possui
+        '''
     def exibir_perfil(self, nome):
-        
         # seguindo
         seguindo = 0
-        for el in self.adjacencia[nome].keys():
+        for elemento in self.adjacencia[nome].keys():
             seguindo += 1
-
+        
         # seguidores
         seguidores = []
-        for el in self.adjacencia.items():
-            for el1 in el[1].items():
-                if nome in el1:
-                    seguidores.append(el1) 
+        for elemento in self.adjacencia.items():
+            for el in elemento[1].items():
+                if nome in el:
+                    seguidores.append(el) 
 
-        print(f"O usuário {nome} segue {seguindo} usuários e tem {len(seguidores)} seguidores.\n")
+        print(f"O usuário {nome} tem {len(seguidores)} seguidores e segue {seguindo} usuários.\n")
 
-    def story(self, nome):
-        
+
+        '''
+        Função para ordenar a lista de Stories, por ordem alfabética com melhores amigos primeiro e depois amigos comuns
+        '''
+    def stories(self, nome):
         lista_amigos = list(self.adjacencia[nome].items())
 
         melhores_amigos = []
         amigos_comuns = []
 
         # Separando 'Amigos comuns' dos 'Melhores Amigos'
-        for el in lista_amigos:
-            if el[1] == '2':
-                melhores_amigos.append(el[0])
+        for amigo in lista_amigos:
+            if amigo[1] == '2':
+                melhores_amigos.append(amigo[0])
             else:
-                amigos_comuns.append(el[0])
+                amigos_comuns.append(amigo[0])
 
-        # Bubblesort para melhores amigos
+        # Bubblesort para Melhores Amigos
         for i in range(len(melhores_amigos)):
             for j in range(len(melhores_amigos)):
                 if melhores_amigos[j] > melhores_amigos[i]:
                     melhores_amigos[i], melhores_amigos[j] = melhores_amigos[j], melhores_amigos[i]
 
-        #Bubblesort para amigos comuns
+        #Bubblesort para Amigos Comuns
         for i in range(len(amigos_comuns)):
             for j in range(len(amigos_comuns)):
                 if amigos_comuns[j] > amigos_comuns[i]:
                     amigos_comuns[i], amigos_comuns[j] = amigos_comuns[j], amigos_comuns[i]
 
-        #juntar ambas listas
-        lista_story = melhores_amigos + amigos_comuns
+        #juntar as listas
+        lista_stories = melhores_amigos + amigos_comuns
         
-        print(f'Exibição de stories do usuário {nome}: {lista_story}\n')
+        print(f'Exibição de stories do usuário {nome}: {lista_stories}\n')
 
-    def top_influencers(self, k):
-    
+
+        '''
+        Função para encontrar quem tem mais seguidores na rede, os Top Influencers
+        '''
+    def top_influencers(self, k):   
         num_seguidores = {}
 
         for usuario in self.adjacencia:
             count = 0
             for seguindo in self.adjacencia.items():
-                for el in seguindo[1]:
-                    if usuario == el:
+                for elemento in seguindo[1]:
+                    if usuario == elemento:
                         count += 1
 
             num_seguidores[usuario] = count
@@ -84,9 +98,13 @@ class Grafo():
                     influencers[i], influencers[j] = influencers[j], influencers[i]
 
         print(f'*** TOP {k} INFLUENCERS ***')
-        for el in influencers[::-1][:k]:
-            print(f'{el[0]}: {el[1]}')
-            
+        for elemento in influencers[::-1][:k]:
+            print(f'{elemento[0]}: {elemento[1]}')
+
+
+        '''
+        Função para encontrar o caminho entre uma pessoa e outra na rede
+        '''
     def busca_caminho_usuarios(self, nome1, nome2):
         fila = [nome1]
         visitados = []
@@ -117,7 +135,6 @@ class Grafo():
                     fila.append(adjacente)
         return print(f"Não foi possivel encontrar um caminho entre {nome1} e {nome2}.")
                         
-
 def cria_grafo():
     g = Grafo()
     for linha in reader_usuarios:
@@ -129,8 +146,7 @@ def cria_grafo():
     return g
 
 g = cria_grafo()
-
 g.exibir_perfil("helena42")
-g.story("helena42")
+g.stories("helena42")
 g.top_influencers(5)
 g.busca_caminho_usuarios("helena42", "isadora45")
